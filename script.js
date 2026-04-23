@@ -1,30 +1,33 @@
-// pega o visor (input)
 const visor = document.querySelector("#visor");
-
-// pega todos os botões
 const botoes = document.querySelectorAll("button");
 
-// percorre cada botão
 botoes.forEach(function(botao) {
-
-    // quando clicar em um botão
     botao.addEventListener("click", function() {
 
         const valor = botao.textContent;
 
-        // se clicar no C → limpa tudo
         if (valor === "C") {
             visor.value = "";
 
-        // se clicar no = → calcula
-        } else if (valor === "=") {
-            visor.value = eval(visor.value);
+        } else if (valor === "⌫") {
+            visor.value = visor.value.slice(0, -1);
 
-        // qualquer outro botão → adiciona no visor
+        } else if (valor === "=") {
+            try {
+                let conta = visor.value;
+
+                conta = conta.replace(/÷/g, "/");
+                conta = conta.replace(/×/g, "*");
+                conta = conta.replace(/%/g, "/100");
+
+                visor.value = eval(conta);
+            } catch {
+                visor.value = "Erro";
+            }
+
         } else {
             visor.value += valor;
         }
 
     });
-
 });
