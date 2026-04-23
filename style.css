@@ -70,3 +70,7 @@ button:active {
 .limpar {
     background-color: red;
 }
+
+.apagar {
+    background-color: #666;
+}
